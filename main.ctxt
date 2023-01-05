@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=main
+comment1.params=c\ text
+comment1.target=javax.swing.JLabel\ labelFor(javax.swing.JComponent,\ java.lang.String)
+comment2.params=
+comment2.target=java.util.Properties\ initConfig()
+comment3.params=p\ title\ body
+comment3.target=void\ storeConfig(java.util.Properties,\ java.lang.String,\ java.lang.String)
+comment4.params=c\ t
+comment4.target=void\ appendLine(javax.swing.JTextArea,\ java.lang.String)
+comment5.params=args
+comment5.target=void\ main(java.lang.String[])
+comment6.params=e
+comment6.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment7.params=e
+comment7.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment8.params=e
+comment8.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment9.params=
+comment9.target=void\ run()
+numComments=10
