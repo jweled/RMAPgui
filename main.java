@@ -122,7 +122,7 @@ public class main {
         window.add(name);
         labelFor(name, "Output image filename");
         
-        String[] formats = {"jpg", "png", "gif", "bmp", "wbmp"};
+        String[] formats = {"jpg", "png", "gif", "bmp"};
         JComboBox format = new JComboBox(formats);
         format.setBounds(15,400,150,25);
         window.add(format);
