@@ -26,7 +26,7 @@ public class main {
     private static Properties initConfig() {
         Properties props = new Properties();
         try {
-            propsreader = new FileReader(new File(".config"));
+            propsreader = new FileReader(new File("config.txt"));
             props.load(propsreader);
             propsreader.close();
         } catch (Exception e) {
@@ -37,7 +37,7 @@ public class main {
     private static void storeConfig(Properties p, String title, String body) {
         p.setProperty(title, body);
         try {
-            FileWriter writer = new FileWriter(new File(".config"));
+            FileWriter writer = new FileWriter(new File("config.txt"));
             p.store(writer, "RMAPGUI configuration");
             writer.close();
         } catch (Exception e) {

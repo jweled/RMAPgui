@@ -1,0 +1,7 @@
+#RMAPGUI configuration
+#Thu Jan 05 17:51:10 EST 2023
+height=0
+dirpath=
+name=generated
+width=hd
+jarpath=
