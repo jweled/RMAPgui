@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.Properties;
+import javax.swing.text.*;
 public class main {
     private static JFrame window;
     private static File rmapjarpath;
@@ -19,7 +20,7 @@ public class main {
     private static JLabel labelFor(JComponent c, String text) {
         Rectangle bounds = c.getBounds();
         JLabel label = new JLabel(text);
-        label.setBounds(bounds.x, (bounds.y - bounds.height), 320, 15);
+        label.setBounds(bounds.x, (bounds.y - bounds.height), 200, 15);
         window.add(label);
         return label;
     }
@@ -44,8 +45,20 @@ public class main {
             JOptionPane.showMessageDialog(null, "Config store failed", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    private static void appendLine(JTextArea c, String t) {
-        c.append(System.lineSeparator() + t);
+    private static void appendLine(JTextPane c, String t) {
+        StyledDocument doc = c.getStyledDocument();
+        try {
+            doc.insertString(doc.getLength(), System.lineSeparator() + t, null);
+        } catch (Exception e) {}
+        c.setCaretPosition(c.getDocument().getLength());
+    }
+    private static void appendFancyLine(JTextPane c, String t, Color clr) {
+        StyledDocument doc = c.getStyledDocument();
+        SimpleAttributeSet attr = new SimpleAttributeSet();
+        StyleConstants.setForeground(attr, clr);
+        try {
+            doc.insertString(doc.getLength(), System.lineSeparator() + t, attr);
+        } catch (Exception e) {}
         c.setCaretPosition(c.getDocument().getLength());
     }
     public static void main(String[] args) {
@@ -129,12 +142,13 @@ public class main {
         window.add(format);
         labelFor(format, "Output image format"); 
         
-        JTextArea out = new JTextArea("...");
+        JTextPane out = new JTextPane();
+        out.setText("...");
         out.setEditable(false);
-        out.setBounds(15,480,800,80);
+        out.setBounds(220,15,260,450);
         
         JScrollPane trout = new JScrollPane(out);
-        trout.setBounds(15,480,305,80);
+        trout.setBounds(out.getBounds());
         window.add(trout);
         
         JButton genbutton = new JButton("Generate");
@@ -143,13 +157,13 @@ public class main {
         genbutton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 out.setText("");
-                appendLine(out, "Saving properties...");
+                appendFancyLine(out, "Saving properties...", Color.BLUE);
                 storeConfig(props, "height", height.getText());
                 storeConfig(props, "width", width.getText());
                 storeConfig(props, "jarpath", rmapjarpath.getPath());
                 storeConfig(props, "dirpath", rmapdirpath.getPath());
                 storeConfig(props, "name", name.getText());
-                appendLine(out, "Starting RMAP...");
+                appendFancyLine(out, "Starting RMAP...", Color.BLUE);
                 new Thread() {
                     public void run() {
                         try {
@@ -165,11 +179,15 @@ public class main {
                             BufferedReader stderr = new BufferedReader(new InputStreamReader(exec.getErrorStream()));
                             
                             String line = null;
+                            String errline = null;
                             while ((line = stdin.readLine()) != null) {
                                 appendLine(out, line);
                             }
+                            while ((errline = stderr.readLine()) != null) {
+                                appendFancyLine(out, errline, Color.RED);
+                            }
                         } catch (Exception i) {
-                            appendLine(out, "Failed");
+                            appendFancyLine(out, "Failed", Color.RED);
                             i.printStackTrace();
                             JOptionPane.showMessageDialog(null, "RMAP execution failed, check your .JAR path", "Error", JOptionPane.ERROR_MESSAGE);
                         }
@@ -180,7 +198,7 @@ public class main {
         
         window.setIconImage(new ImageIcon("x32.png").getImage());
         window.setLayout(null);
-        window.setSize(350,600);
+        window.setSize(500,510);
         window.setResizable(false);
         window.setVisible(true);
     }
