@@ -50,6 +50,7 @@ public class main {
     }
     public static void main(String[] args) {
         window = new JFrame("RMAP GUI");
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //initialize important stuff
         Properties props = initConfig();
@@ -141,6 +142,7 @@ public class main {
         window.add(genbutton);
         genbutton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                out.setText("");
                 appendLine(out, "Saving properties...");
                 storeConfig(props, "height", height.getText());
                 storeConfig(props, "width", width.getText());
