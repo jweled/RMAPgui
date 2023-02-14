@@ -103,7 +103,7 @@ public class main {
         window.add(height);
         labelFor(height, "Output image height");
         
-        String[] modes = {"random", "color", "static", "lines", "checkered"};
+        String[] modes = {"random", "color", "static", "lines", "checkered", "s-random", "s-static"};
         JComboBox mode = new JComboBox(modes);
         mode.setBounds(15,220,150,25);
         window.add(mode);
@@ -196,7 +196,7 @@ public class main {
             }
         });
         
-        window.setIconImage(new ImageIcon("x32.png").getImage());
+        window.setIconImage(new ImageIcon(new main().getClass().getResource("assets/x32.png")).getImage());
         window.setLayout(null);
         window.setSize(500,510);
         window.setResizable(false);

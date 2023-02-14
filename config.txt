@@ -1,7 +1,7 @@
 #RMAPGUI configuration
-#Fri Jan 06 07:53:12 EST 2023
-height=20
-dirpath=
+#Fri Jan 06 15:37:07 EST 2023
+height=0
+dirpath=C\:\\Users\\4804095191\\Pictures
 name=generated
-width=20
-jarpath=
+width=4k
+jarpath=C\:\\Users\\4804095191\\Documents\\PROGS\\RMAP\\rmap1.2.3.jar
